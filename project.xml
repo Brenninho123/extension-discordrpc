@@ -1,64 +1,66 @@
 <Project>
-    
+
     <!-- ============================= -->
-    <!--        APP INFO              -->
+    <!--            APP INFO          -->
     <!-- ============================= -->
-    
-    <app 
+
+    <meta 
         title="ExtensionDiscordRPC"
-        file="ExtensionDiscordRPC"
         package="com.brenninho.extensiondiscordrpc"
         version="1.0.0"
         company="Brenninho123"
     />
 
+    <app main="Main" path="export" file="ExtensionDiscordRPC" />
+
     <!-- ============================= -->
-    <!--        WINDOW CONFIG          -->
+    <!--           WINDOW             -->
     <!-- ============================= -->
 
     <window 
         width="1280"
         height="720"
         fps="60"
-        background="#1a1b23"
+        background="#0f0f14"
         hardware="true"
         vsync="true"
-        resizable="true"
+        resizable="false"
+        allow-shaders="true"
     />
 
     <!-- ============================= -->
-    <!--        SOURCE FOLDER          -->
+    <!--           SOURCE             -->
     <!-- ============================= -->
 
     <source path="source" />
 
     <!-- ============================= -->
-    <!--        HAXE LIBRARIES         -->
+    <!--          LIBRARIES           -->
     <!-- ============================= -->
 
     <haxelib name="lime" />
     <haxelib name="openfl" />
 
     <!-- ============================= -->
-    <!--        WINDOWS ONLY TARGET    -->
+    <!--        WINDOWS TARGET        -->
     <!-- ============================= -->
-
-    <set name="desktop" if="windows" />
-    <set name="windows-only" value="true" />
 
     <target name="windows" />
 
     <!-- ============================= -->
-    <!--        HXCPP CONFIG           -->
+    <!--         DEFINES              -->
     <!-- ============================= -->
 
+    <haxedef name="desktop" />
     <haxedef name="HXCPP_M64" />
     <haxedef name="DISCORD_RPC_ENABLED" />
 
     <!-- ============================= -->
-    <!--        ASSETS (optional)      -->
+    <!--       RELEASE OPTIMIZATION   -->
     <!-- ============================= -->
 
-    <assets path="assets" rename="assets" if="exists('assets')" />
+    <set name="cpp" />
+    <set name="static_link" value="true" />
+    <set name="no_console" value="true" if="release" />
 
 </Project>
