@@ -1,9 +1,6 @@
 <Project>
 
-    <!-- ============================= -->
-    <!--            APP INFO          -->
-    <!-- ============================= -->
-
+    <!-- APP INFO -->
     <meta 
         title="ExtensionDiscordRPC"
         package="com.brenninho.extensiondiscordrpc"
@@ -13,10 +10,7 @@
 
     <app main="Main" path="export" file="ExtensionDiscordRPC" />
 
-    <!-- ============================= -->
-    <!--           WINDOW             -->
-    <!-- ============================= -->
-
+    <!-- WINDOW -->
     <window 
         width="1280"
         height="720"
@@ -25,42 +19,22 @@
         hardware="true"
         vsync="true"
         resizable="false"
-        allow-shaders="true"
     />
 
-    <!-- ============================= -->
-    <!--           SOURCE             -->
-    <!-- ============================= -->
-
+    <!-- SOURCE -->
     <source path="source" />
 
-    <!-- ============================= -->
-    <!--          LIBRARIES           -->
-    <!-- ============================= -->
-
+    <!-- LIBRARIES -->
     <haxelib name="lime" />
     <haxelib name="openfl" />
+    <haxelib name="discord_rpc" />
 
-    <!-- ============================= -->
-    <!--        WINDOWS TARGET        -->
-    <!-- ============================= -->
-
+    <!-- WINDOWS TARGET -->
     <target name="windows" />
 
-    <!-- ============================= -->
-    <!--         DEFINES              -->
-    <!-- ============================= -->
-
+    <!-- DEFINES -->
     <haxedef name="desktop" />
     <haxedef name="HXCPP_M64" />
     <haxedef name="DISCORD_RPC_ENABLED" />
-
-    <!-- ============================= -->
-    <!--       RELEASE OPTIMIZATION   -->
-    <!-- ============================= -->
-
-    <set name="cpp" />
-    <set name="static_link" value="true" />
-    <set name="no_console" value="true" if="release" />
 
 </Project>
