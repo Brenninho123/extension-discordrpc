@@ -1,0 +1,64 @@
+<Project>
+    
+    <!-- ============================= -->
+    <!--        APP INFO              -->
+    <!-- ============================= -->
+    
+    <app 
+        title="ExtensionDiscordRPC"
+        file="ExtensionDiscordRPC"
+        package="com.brenninho.extensiondiscordrpc"
+        version="1.0.0"
+        company="Brenninho123"
+    />
+
+    <!-- ============================= -->
+    <!--        WINDOW CONFIG          -->
+    <!-- ============================= -->
+
+    <window 
+        width="1280"
+        height="720"
+        fps="60"
+        background="#1a1b23"
+        hardware="true"
+        vsync="true"
+        resizable="true"
+    />
+
+    <!-- ============================= -->
+    <!--        SOURCE FOLDER          -->
+    <!-- ============================= -->
+
+    <source path="source" />
+
+    <!-- ============================= -->
+    <!--        HAXE LIBRARIES         -->
+    <!-- ============================= -->
+
+    <haxelib name="lime" />
+    <haxelib name="openfl" />
+
+    <!-- ============================= -->
+    <!--        WINDOWS ONLY TARGET    -->
+    <!-- ============================= -->
+
+    <set name="desktop" if="windows" />
+    <set name="windows-only" value="true" />
+
+    <target name="windows" />
+
+    <!-- ============================= -->
+    <!--        HXCPP CONFIG           -->
+    <!-- ============================= -->
+
+    <haxedef name="HXCPP_M64" />
+    <haxedef name="DISCORD_RPC_ENABLED" />
+
+    <!-- ============================= -->
+    <!--        ASSETS (optional)      -->
+    <!-- ============================= -->
+
+    <assets path="assets" rename="assets" if="exists('assets')" />
+
+</Project>
