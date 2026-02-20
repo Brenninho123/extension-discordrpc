@@ -1,5 +1,8 @@
 <Project>
 
+    <!-- ============================= -->
+    <!--            APP INFO          -->
+    <!-- ============================= -->
     <meta 
         title="ExtensionDiscordRPC"
         package="com.brenninho.extensiondiscordrpc"
@@ -9,6 +12,9 @@
 
     <app main="Main" path="export" file="ExtensionDiscordRPC" />
 
+    <!-- ============================= -->
+    <!--           WINDOW             -->
+    <!-- ============================= -->
     <window 
         width="1280"
         height="720"
@@ -19,14 +25,44 @@
         resizable="false"
     />
 
+    <!-- ============================= -->
+    <!--           SOURCE             -->
+    <!-- ============================= -->
     <source path="source" />
 
+    <!-- ============================= -->
+    <!--          LIBRARIES           -->
+    <!-- ============================= -->
     <haxelib name="lime" />
     <haxelib name="openfl" />
 
+    <!-- ============================= -->
+    <!--        WINDOWS TARGET        -->
+    <!-- ============================= -->
     <target name="windows" />
-
     <haxedef name="desktop" />
     <haxedef name="HXCPP_M64" />
+
+    <!-- ============================= -->
+    <!--        ANDROID TARGET        -->
+    <!-- ============================= -->
+    <target name="android" />
+    <haxedef name="android" />
+
+    <!-- Config Android SDK/NDK -->
+    <set name="android-ndk" value="23.1.7779620" />
+    <set name="android-sdk" value="33" />
+    <set name="android-min-sdk" value="21" />
+
+    <!-- ============================= -->
+    <!--         NATIVE EXTENSIONS    -->
+    <!-- ============================= -->
+    <include path="project" />
+    <ndll name="extension-discordrpc" />
+
+    <!-- ============================= -->
+    <!--        BUILD DEFINES          -->
+    <!-- ============================= -->
+    <haxedef name="DISCORD_NATIVE" />
 
 </Project>
