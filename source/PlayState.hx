@@ -8,16 +8,28 @@ import discord.Discord;
 
 class PlayState extends Sprite
 {
-    private var songName:String;
-    private var difficulty:String;
+    // Game info
+    public var gameMode:String;
+    public var levelName:String;
+    public var difficulty:String;
+
+    // Song / match info
+    public var totalLength:Float; // in seconds
+    private var startTimestamp:Float;
+
+    // Gameplay stats
+    private var score:Int = 0;
     private var isPaused:Bool = false;
     private var isGameOver:Bool = false;
 
-    public function new(song:String, diff:String)
+    public function new(mode:String, level:String, diff:String, length:Float = 120)
     {
         super();
-        songName = song;
+
+        gameMode = mode;
+        levelName = level;
         difficulty = diff;
+        totalLength = length;
 
         addEventListener(Event.ADDED_TO_STAGE, init);
     }
@@ -26,28 +38,87 @@ class PlayState extends Sprite
     {
         removeEventListener(Event.ADDED_TO_STAGE, init);
 
-        // Set presence when song starts
+        startTimestamp = Date.now().getTime();
+
         updatePresence();
 
-        // Keyboard listener for pause simulation
         stage.addEventListener(KeyboardEvent.KEY_DOWN, onKeyPress);
+        addEventListener(Event.ENTER_FRAME, update);
     }
+
+    // ==========================
+    // Core Update Loop
+    // ==========================
+
+    private function update(e:Event):Void
+    {
+        if (isPaused || isGameOver) return;
+
+        // Simulate score increase
+        score += 1;
+
+        // Check if level ended
+        if (getElapsedTime() >= totalLength)
+        {
+            endGame();
+        }
+    }
+
+    // ==========================
+    // Presence System
+    // ==========================
 
     private function updatePresence():Void
     {
+        var details:String;
+        var state:String;
+
         if (isGameOver)
         {
-            Discord.changePresence("Game Over", songName + " [" + difficulty + "]");
+            details = "Game Over";
+            state = levelName + " • Score: " + score;
         }
         else if (isPaused)
         {
-            Discord.changePresence("Paused", songName + " [" + difficulty + "]");
+            details = "Paused";
+            state = levelName + " • Score: " + score;
         }
         else
         {
-            Discord.changePresence("Playing: " + songName, "Difficulty: " + difficulty);
+            details = formatModeDetails();
+            state = levelName + " [" + difficulty + "] • Score: " + score;
+        }
+
+        Discord.changePresence(details, state);
+    }
+
+    private function formatModeDetails():String
+    {
+        switch (gameMode.toLowerCase())
+        {
+            case "rhythm":
+                return "Playing Rhythm Mode";
+
+            case "story":
+                return "Story Mode";
+
+            case "freeplay":
+                return "Freeplay";
+
+            case "arcade":
+                return "Arcade Mode";
+
+            case "survival":
+                return "Survival Mode";
+
+            default:
+                return "Playing " + gameMode;
         }
     }
+
+    // ==========================
+    // Controls
+    // ==========================
 
     private function onKeyPress(e:KeyboardEvent):Void
     {
@@ -58,6 +129,10 @@ class PlayState extends Sprite
 
             case Keyboard.R:
                 triggerGameOver();
+
+            case Keyboard.S:
+                score += 100;
+                updatePresence();
         }
     }
 
@@ -76,8 +151,23 @@ class PlayState extends Sprite
         updatePresence();
     }
 
-    public function endSong():Void
+    private function endGame():Void
     {
-        Discord.changePresence("Song Complete!", songName + " [" + difficulty + "]");
+        removeEventListener(Event.ENTER_FRAME, update);
+        Discord.changePresence("Level Complete!", levelName + " • Final Score: " + score);
+    }
+
+    // ==========================
+    // Time Utilities
+    // ==========================
+
+    private function getElapsedTime():Float
+    {
+        return (Date.now().getTime() - startTimestamp) / 1000;
+    }
+
+    private function getRemainingTime():Float
+    {
+        return totalLength - getElapsedTime();
     }
 }
