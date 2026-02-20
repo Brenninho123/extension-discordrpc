@@ -1,0 +1,37 @@
+name: Windows Build
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: windows-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Setup Haxe
+        uses: krdlab/setup-haxe@v1
+        with:
+          haxe-version: 4.3.4
+
+      - name: Install Haxelib Dependencies
+        run: |
+          haxelib setup C:\haxelib
+          haxelib install lime --quiet
+          haxelib install openfl --quiet
+          haxelib run lime setup -y
+
+      - name: Build Windows Release
+        run: haxelib run lime build windows -release
+
+      - name: Upload Build Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: ExtensionDiscordRPC-Windows
+          path: export/windows/bin/
