@@ -1,6 +1,5 @@
 <Project>
 
-    <!-- APP INFO -->
     <meta 
         title="ExtensionDiscordRPC"
         package="com.brenninho.extensiondiscordrpc"
@@ -10,7 +9,6 @@
 
     <app main="Main" path="export" file="ExtensionDiscordRPC" />
 
-    <!-- WINDOW -->
     <window 
         width="1280"
         height="720"
@@ -21,20 +19,14 @@
         resizable="false"
     />
 
-    <!-- SOURCE -->
     <source path="source" />
 
-    <!-- LIBRARIES -->
     <haxelib name="lime" />
     <haxelib name="openfl" />
-    <haxelib name="discord_rpc" />
 
-    <!-- WINDOWS TARGET -->
     <target name="windows" />
 
-    <!-- DEFINES -->
     <haxedef name="desktop" />
     <haxedef name="HXCPP_M64" />
-    <haxedef name="DISCORD_RPC_ENABLED" />
 
 </Project>
