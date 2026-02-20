@@ -1,0 +1,66 @@
+name: Android Build
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      # -------------------------
+      # Setup Java (Required)
+      # -------------------------
+      - name: Setup Java 17
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: 17
+
+      # -------------------------
+      # Setup Android SDK
+      # -------------------------
+      - name: Setup Android SDK
+        uses: android-actions/setup-android@v3
+
+      # -------------------------
+      # Setup Haxe
+      # -------------------------
+      - name: Setup Haxe
+        uses: krdlab/setup-haxe@v1
+        with:
+          haxe-version: 4.3.4
+
+      - name: Setup Haxelib
+        run: haxelib setup ~/haxelib
+
+      # -------------------------
+      # Install Dependencies
+      # -------------------------
+      - name: Install Haxelib Dependencies
+        run: |
+          haxelib install lime --quiet
+          haxelib install openfl --quiet
+          haxelib run lime setup -y
+
+      # -------------------------
+      # Build Android
+      # -------------------------
+      - name: Build Android (Release)
+        run: haxelib run lime build android -release
+
+      # -------------------------
+      # Upload APK
+      # -------------------------
+      - name: Upload APK Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: ExtensionDiscordRPC-Android
+          path: export/android/bin/build/outputs/apk/release/
