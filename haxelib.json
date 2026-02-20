@@ -6,18 +6,19 @@
     "discord",
     "rpc",
     "richpresence",
-    "extension",
+    "windows",
     "haxe"
   ],
-  "description": "A simple Discord Rich Presence extension for Haxe projects.",
+  "description": "A Discord Rich Presence extension for Haxe Windows projects.",
   "version": "1.0.0",
-  "releasenote": "Initial release.",
+  "releasenote": "Added Windows Discord RPC support.",
   "contributors": [
     "Brenninho123"
   ],
-  "classPath": "src",
+  "classPath": "source",
   "dependencies": {
     "lime": "",
-    "openfl": ""
+    "openfl": "",
+    "discord_rpc": ""
   }
 }
