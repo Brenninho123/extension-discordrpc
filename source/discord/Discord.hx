@@ -1,91 +1,49 @@
 package discord;
 
-#if desktop
+#if windows
 import sys.thread.Thread;
-import discord_rpc.DiscordRpc;
 #end
 
 class Discord
 {
-    #if desktop
-    public static var clientID:String = "YOUR_DISCORD_APPLICATION_ID";
     private static var started:Bool = false;
-    #end
+    private static var clientID:String = "YOUR_DISCORD_APPLICATION_ID";
 
-    /**
-     * Initialize Discord RPC
-     */
     public static function initialize():Void
     {
-        #if desktop
+        #if windows
         if (started) return;
 
-        var options:DiscordRpcOptions = {
-            clientID: clientID,
-            onReady: onReady,
-            onError: onError,
-            onDisconnected: onDisconnected
-        };
-
-        DiscordRpc.start(options);
+        trace("Discord RPC Initialized (Stub Mode)");
         started = true;
 
-        // Background process loop
         Thread.create(function() {
-            while (true)
+            while (started)
             {
-                DiscordRpc.process();
                 Sys.sleep(2);
             }
         });
         #end
     }
 
-    /**
-     * Change Rich Presence
-     */
     public static function changePresence(details:String, state:String):Void
     {
-        #if desktop
+        #if windows
         if (!started) return;
 
-        DiscordRpc.presence({
-            details: details,
-            state: state,
-            largeImageKey: "logo",
-            largeImageText: "Extension Discord RPC",
-            startTimestamp: Date.now().getTime()
-        });
+        trace("[Discord RPC]");
+        trace("Details: " + details);
+        trace("State: " + state);
         #end
     }
 
-    /**
-     * Shutdown RPC
-     */
     public static function shutdown():Void
     {
-        #if desktop
+        #if windows
         if (!started) return;
 
-        DiscordRpc.shutdown();
+        trace("Discord RPC Shutdown");
         started = false;
         #end
     }
-
-    #if desktop
-    private static function onReady():Void
-    {
-        trace("Discord RPC Ready!");
-    }
-
-    private static function onError(code:Int, message:String):Void
-    {
-        trace("Discord RPC Error: " + code + " - " + message);
-    }
-
-    private static function onDisconnected(code:Int, message:String):Void
-    {
-        trace("Discord RPC Disconnected: " + code + " - " + message);
-    }
-    #end
 }
