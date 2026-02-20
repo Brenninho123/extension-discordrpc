@@ -43,22 +43,23 @@
     <haxedef name="desktop" />
     <haxedef name="HXCPP_M64" />
 
+    <!-- Include C++ only for Windows -->
+    <if condition="windows">
+        <include path="project/src" />
+        <include path="project/include" />
+        <ndll name="extension-discordrpc" />
+    </if>
+
     <!-- ============================= -->
     <!--        ANDROID TARGET        -->
     <!-- ============================= -->
     <target name="android" />
     <haxedef name="android" />
 
-    <!-- Config Android SDK/NDK -->
+    <!-- Android SDK / NDK Config -->
     <set name="android-ndk" value="23.1.7779620" />
     <set name="android-sdk" value="33" />
     <set name="android-min-sdk" value="21" />
-
-    <!-- ============================= -->
-    <!--         NATIVE EXTENSIONS    -->
-    <!-- ============================= -->
-    <include path="project" />
-    <ndll name="extension-discordrpc" />
 
     <!-- ============================= -->
     <!--        BUILD DEFINES          -->
