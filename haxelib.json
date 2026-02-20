@@ -1,0 +1,23 @@
+{
+  "name": "extension-discordrpc",
+  "url": "https://github.com/Brenninho123/extension-discordrpc",
+  "license": "Apache",
+  "tags": [
+    "discord",
+    "rpc",
+    "richpresence",
+    "extension",
+    "haxe"
+  ],
+  "description": "A simple Discord Rich Presence extension for Haxe projects.",
+  "version": "1.0.0",
+  "releasenote": "Initial release.",
+  "contributors": [
+    "Brenninho123"
+  ],
+  "classPath": "src",
+  "dependencies": {
+    "lime": "",
+    "openfl": ""
+  }
+}
