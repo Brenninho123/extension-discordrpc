@@ -1,94 +1,173 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Extension Discord RPC</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Extension Discord RPC</title>
 
-    <style>
-        body {
-            margin: 0;
-            font-family: Arial, Helvetica, sans-serif;
-            background: linear-gradient(135deg, #5865F2, #23272A);
-            color: white;
-            text-align: center;
-        }
+<style>
+:root {
+    --primary: #5865F2;
+    --bg-dark: #0f0f14;
+    --card: #1a1b23;
+    --text-light: #ffffff;
+    --text-muted: #a0a0b0;
+}
 
-        .container {
-            padding: 60px 20px;
-        }
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
 
-        h1 {
-            font-size: 3rem;
-            margin-bottom: 10px;
-        }
+body {
+    font-family: "Segoe UI", Arial, sans-serif;
+    background: var(--bg-dark);
+    color: var(--text-light);
+    line-height: 1.6;
+}
 
-        p {
-            font-size: 1.2rem;
-            max-width: 600px;
-            margin: 0 auto 30px auto;
-            opacity: 0.9;
-        }
+/* Header */
+header {
+    padding: 80px 20px;
+    text-align: center;
+    background: radial-gradient(circle at top, #1f2233, #0f0f14);
+}
 
-        .button {
-            display: inline-block;
-            padding: 15px 30px;
-            background-color: #ffffff;
-            color: #5865F2;
-            text-decoration: none;
-            border-radius: 8px;
-            font-weight: bold;
-            transition: 0.3s;
-        }
+header h1 {
+    font-size: 3rem;
+    margin-bottom: 20px;
+}
 
-        .button:hover {
-            background-color: #ddd;
-        }
+header p {
+    font-size: 1.2rem;
+    color: var(--text-muted);
+    max-width: 600px;
+    margin: 0 auto 30px auto;
+}
 
-        .card {
-            margin-top: 60px;
-            background: rgba(255, 255, 255, 0.1);
-            padding: 30px;
-            border-radius: 15px;
-            display: inline-block;
-            max-width: 500px;
-        }
+/* Button */
+.button {
+    display: inline-block;
+    padding: 14px 28px;
+    background: var(--primary);
+    color: white;
+    text-decoration: none;
+    border-radius: 8px;
+    font-weight: bold;
+    transition: 0.3s ease;
+}
 
-        footer {
-            margin-top: 80px;
-            padding: 20px;
-            opacity: 0.6;
-        }
-    </style>
+.button:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(88,101,242,0.4);
+}
+
+/* Section */
+section {
+    padding: 60px 20px;
+    max-width: 1000px;
+    margin: auto;
+}
+
+.features {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+}
+
+.card {
+    background: var(--card);
+    padding: 25px;
+    border-radius: 12px;
+    transition: 0.3s ease;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    background: #222332;
+}
+
+.card h3 {
+    margin-bottom: 10px;
+}
+
+/* Code block */
+pre {
+    background: #111218;
+    padding: 20px;
+    border-radius: 10px;
+    overflow-x: auto;
+    color: #8be9fd;
+    margin-top: 20px;
+}
+
+/* Footer */
+footer {
+    text-align: center;
+    padding: 40px 20px;
+    color: var(--text-muted);
+    border-top: 1px solid #222;
+    margin-top: 40px;
+}
+
+@media(max-width: 600px) {
+    header h1 {
+        font-size: 2rem;
+    }
+}
+</style>
 </head>
 <body>
 
-    <div class="container">
-        <h1>Extension Discord RPC</h1>
-        <p>
-            A lightweight Discord Rich Presence extension for Haxe projects.
-            Easily integrate custom status, images, and timestamps into Discord.
-        </p>
+<header>
+    <h1>Extension Discord RPC</h1>
+    <p>
+        A powerful and lightweight Discord Rich Presence extension for Haxe projects.
+        Designed for games, engines, and custom applications.
+    </p>
+    <a class="button" href="https://github.com/Brenninho123/extension-discordrpc" target="_blank">
+        View on GitHub
+    </a>
+</header>
 
-        <a class="button" href="https://github.com/Brenninho123/extension-discordrpc" target="_blank">
-            View on GitHub
-        </a>
-
+<section>
+    <h2 style="margin-bottom: 30px;">🚀 Features</h2>
+    <div class="features">
         <div class="card">
-            <h2>Features</h2>
-            <p>
-                ✔ Easy integration<br>
-                ✔ Custom Rich Presence<br>
-                ✔ Timestamp support<br>
-                ✔ Lightweight and fast<br>
-                ✔ Perfect for Haxe / FNF projects
-            </p>
+            <h3>⚡ Easy Integration</h3>
+            <p>Simple setup for Haxe, Lime, OpenFL and FNF-based engines.</p>
+        </div>
+        <div class="card">
+            <h3>🎮 Multi-Game Support</h3>
+            <p>Supports Rhythm, Story, Survival, Arcade and custom modes.</p>
+        </div>
+        <div class="card">
+            <h3>📊 Dynamic Updates</h3>
+            <p>Automatically updates score, time, and game state.</p>
+        </div>
+        <div class="card">
+            <h3>🧠 Lightweight</h3>
+            <p>Optimized background thread processing with minimal overhead.</p>
         </div>
     </div>
+</section>
 
-    <footer>
-        Made by Brenninho123 • Apache 2.0 License
-    </footer>
+<section>
+    <h2>💻 Example Usage</h2>
+<pre>
+Discord.initialize();
+Discord.changePresence(
+    "Playing Rhythm Mode",
+    "Bopeebo [Hard] • Score: 15420"
+);
+</pre>
+</section>
+
+<footer>
+    Made by Brenninho123 • Apache 2.0 License<br>
+    Built for Haxe Developers 🚀
+</footer>
 
 </body>
 </html>
